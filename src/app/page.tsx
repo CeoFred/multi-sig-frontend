@@ -46,12 +46,18 @@ const [data, setRequestData] = useState<ITransferRequest[]>([])
             <div>Status: {transaction.completed ? 'Completed' : 'Pending Approval'}</div>
             <div className='w-full'>Receipient: {truncateEthereumAddress(transaction.receipient)}</div>
             <div className='w-full'>Total Approvals: {transaction.totalSignatures}</div>
+            <div className='w-full'>Required Approvals: {wallet.minSignatureApprovals}</div>
 
 
 
           </div>
-          {transaction.completed ? 
-            <button className="bg-white text-black px-6 rounded w-full py-4 my-5">View Transaction</button> : <button className="bg-white text-black px-6 rounded w-full py-4 my-5" onClick={() => router.push(`/sign/${transaction._id}`)}>Sign Request</button>}
+          
+      
+            {transaction.completed ?
+            <button  onClick={() => {
+              window.location.href = transaction.hash
+            }} className="bg-white text-black px-6 rounded w-full py-4 my-5">View Transaction</button> : <button className="bg-white text-black px-6 rounded w-full py-4 my-5" onClick={() => router.push(`/sign/${transaction._id}`)}>Sign Request</button>}
+ 
         </div>
       }) :''}
         </main>
